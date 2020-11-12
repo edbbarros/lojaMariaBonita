@@ -6,6 +6,7 @@ exports.Insert = (req, res, next) => {
     const telefone = req.body.telefone;
     const datanascimento = req.body.datanascimento;
     const pontoderefencia = req.body.pontoderefencia;
+    const cep = req.body.cep;
     const email = req.body.email;
     const uf = req.body.uf;
     const localidade = req.body.localidade; //cidade
@@ -17,20 +18,24 @@ exports.Insert = (req, res, next) => {
         telefone: telefone,
         datanascimento: datanascimento,
         pontoderefencia: pontoderefencia,
+        cep: cep,
         email: email,
         uf: uf,
         localidade: localidade,
         bairro: bairro,
         logradouro: logradouro,
-    })
-        .then((usuario) => {
-            if (usuario) {
-                res.status(status.OK).send(usuario);
-            } else {
-                res.status(status.NOT_FOUND).send();
-            }
-        })
-        .catch((error) => next(error));
+    }).then((usuario) => {
+        if (usuario) {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.set('Access-Control-Allow-Credentials', 'true');
+            res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+
+ 
+            res.status(status.OK).send(usuario);
+        } else {
+            res.status(status.NOT_FOUND).send();
+        }
+    }).catch((error) => next(error));
 };
 
 exports.SearchAll = (req, res, next) => {
@@ -39,8 +44,7 @@ exports.SearchAll = (req, res, next) => {
             if (usuario) {
                 res.status(status.OK).send(usuario);
             }
-        })
-        .catch((error) => next(error));
+        }).catch((error) => next(error));
 };
 exports.SearchOne = (req, res, next) => {
     const id = req.params.id;
@@ -61,6 +65,7 @@ exports.Update = (req, res, next) => {
     const telefone = req.body.telefone;
     const datanascimento = req.body.datanascimento;
     const pontoderefencia = req.body.pontoderefencia;
+    const cep = req.body.cep;
     const email = req.body.email;
     const uf = req.body.uf;
     const localidade = req.body.localidade;
@@ -74,6 +79,7 @@ exports.Update = (req, res, next) => {
                 telefone: telefone,
                 datanascimento: datanascimento,
                 pontoderefencia: pontoderefencia,
+                cep: cep,
                 email: email,
                 uf: uf,
                 localidade: localidade,
@@ -106,7 +112,7 @@ exports.Delete = (req, res, next) => {
                     .then(() => {
                         res.status(status.OK).send();
                     })
-                .catch(error => next(error));
+                    .catch(error => next(error));
             } else {
                 res.status(status.NOT_FOUND).send();
             }
