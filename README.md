@@ -16,8 +16,8 @@ Rotas da Aplicação
 		4 – (Rota de edição dos usuários)
 		5 – (Rota para deletar o usuário)
 
-1.	<Route exact path = "/usuario" component={MainUsuario} />
-2.	<Route path = "/usuarios/:id" component={Detalheusuario} />
-3.	<Route path = "/criar" component={CriarUsuario} />
-4.	<Route path = "/editarUsuario/:id" component={EditarUsuario} />
-5.	<Route path = "/deletarUsuario/:id" component={DeletarUsuario}/>
+1.	Route exact path = "/usuario" component={MainUsuario} 
+2.	Route path = "/usuarios/:id" component={Detalheusuario} 
+3.	Route path = "/criar" component={CriarUsuario} 
+4.	Route path = "/editarUsuario/:id" component={EditarUsuario} 
+5.	Route path = "/deletarUsuario/:id" component={DeletarUsuario}
