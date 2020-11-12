@@ -29,8 +29,6 @@ exports.Insert = (req, res, next) => {
             res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             res.set('Access-Control-Allow-Credentials', 'true');
             res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-
- 
             res.status(status.OK).send(usuario);
         } else {
             res.status(status.NOT_FOUND).send();
@@ -71,33 +69,32 @@ exports.Update = (req, res, next) => {
     const localidade = req.body.localidade;
     const bairro = req.body.bairro;
     const logradouro = req.body.logradouro;
-
+    
     Usuario.findByPk(id).then((usuario) => {
         if (usuario) {
-            usuario.update({
-                nome: nome,
-                telefone: telefone,
-                datanascimento: datanascimento,
-                pontoderefencia: pontoderefencia,
-                cep: cep,
-                email: email,
-                uf: uf,
-                localidade: localidade,
-                bairro: bairro,
-                logradouro: logradouro,
-            },
+            usuario.update(
+                {
+                    nome: nome,
+                    telefone: telefone,
+                    datanascimento: datanascimento,
+                    pontoderefencia: pontoderefencia,
+                    cep: cep,
+                    email: email,
+                    uf: uf,
+                    localidade: localidade,
+                    bairro: bairro,
+                    logradouro: logradouro,
+                },
                 {
                     where: { id: id }
-                })
-                .then(() => {
-                    res.status(status.OK).send();
-                })
-                .catch(error => next(error));
+                }
+            ).then(() => {
+                res.status(status.OK).send();
+            }).catch(error => next(error));
         } else {
             res.status(status.NOT_FOUND).send();
         }
-    })
-        .catch(error => next(error));
+    }).catch(error => next(error));
 };
 
 exports.Delete = (req, res, next) => {
